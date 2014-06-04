@@ -24,13 +24,14 @@ module DataMapper
         # TODO: document
         # @api public
         def [](*values)
-          if klass = generated_classes[values.flatten]
+          values.flatten!
+          if klass = generated_classes[values]
             klass
           else
             klass = ::Class.new(self)
             klass.flags(values)
 
-            generated_classes[values.flatten] = klass
+            generated_classes[values] = klass
 
             klass
           end
