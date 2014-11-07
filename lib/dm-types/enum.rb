@@ -32,6 +32,7 @@ module DataMapper
       def dump(value)
         case value
         when ::Array then value.collect { |v| dump(v) }
+        when ::Integer then flag_map.has_key?(value) ? value : nil
         else              flag_map.invert[value]
         end
       end
